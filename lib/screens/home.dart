@@ -36,7 +36,10 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         // Text, Container and other similar these are all consider as Widgets in dart
-        title: Text("Catalog App"),
+        title: Text(
+          "Catalog App",
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: Center(
         child: Container(
