@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/utils/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ignore: unused_import
@@ -21,8 +22,13 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.deepPurple,
           fontFamily: GoogleFonts.lato().fontFamily),
       darkTheme: ThemeData(brightness: Brightness.dark),
+      debugShowCheckedModeBanner: false,
       // initialRoute: "/home",
-      routes: {"/": (context) => Login(), "/home": (context) => Home()},
+      routes: {
+        "/": (context) => Login(),
+        AppRoutes.HomeRoute: (context) => Home(),
+        AppRoutes.LoginRoute: (context) => Login()
+      },
     );
   }
 }
