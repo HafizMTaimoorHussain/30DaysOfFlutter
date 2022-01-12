@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, avoid_unnecessary_containers, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/widgets/drawer.dart';
 
 class Home extends StatelessWidget {
   // *** Datatypes With Basic Concepts *** //
@@ -35,14 +36,17 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         // Text, Container and other similar these are all consider as Widgets in dart
-        title: Text("Catalog App"),
+        title: Text(
+          "Catalog App",
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: Center(
         child: Container(
           child: Text("Welcome to $days days of flutter learning by $name"),
         ),
       ),
-      drawer: Drawer(),
+      drawer: MyDrawer(),
     );
   }
 }
