@@ -1,6 +1,20 @@
 // ignore_for_file: camel_case_types
 
-class item {
+class CatalogModel {
+  static final items = [
+    Item(
+      id: 1,
+      name: "Iphone 12 pro max",
+      desc: "Apple iPhone 12th generation",
+      price: 150000,
+      color: "#33505a",
+      image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRISJ6msIu4AU9_M9ZnJVQVFmfuhfyJjEtbUm3ZK11_8IV9TV25-1uM5wHjiFNwKy99w0mR5Hk&usqp=CAc",
+    )
+  ];
+}
+
+class Item {
   final int id;
   final String name;
   final String desc;
@@ -8,23 +22,11 @@ class item {
   final String color;
   final String image;
 
-  item(
+  Item(
       {required this.id,
       required this.name,
       required this.desc,
       required this.price,
       required this.color,
       required this.image});
-
-  final products = [
-    item(
-      id: 1,
-      name: "Iphone 12 pro max",
-      desc: "Iphone 12 pro max description",
-      price: 150000,
-      color: "#33505a",
-      image:
-          "https://gravatar.com/avatar/2d84be965f636b9e553deb8cdb566e41?s=400&d=robohash&r=x",
-    )
-  ];
 }
