@@ -1,31 +1,42 @@
 // ignore_for_file: use_key_in_widget_constructors, avoid_unnecessary_containers, prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_demo/models/catalog.dart';
 import 'package:flutter_demo/widgets/drawer.dart';
 import 'package:flutter_demo/widgets/item_widget.dart';
 
-class Home extends StatelessWidget {
-
-  final int days = 40;
-  final String name = "Peter Parker";
-
-  //
-  // bringFood(rupees: 50); if I set value of rupees so it will take it as 50 otherwise it will used predined value which is 100
-  //
-  // basic concept of methods
-  // if I set @required before bool ColdDrink so it will give error if I don't pass bool value;
-  // bringFood({bool ColdDrink, int rupees = 100}) {
-  //  Take my bike
-  //
-  //  Go to bihaari for zinger
-  // }
-  //
-  // //
+class Home extends StatefulWidget {
 
   @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final int days = 40;
+
+  final String name = "Peter Parker";
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    await Future.delayed(Duration(seconds: 2));
+    final loadedData = await rootBundle.loadString("assets/files/catalog.json");
+    final catalogData = jsonDecode(loadedData);
+    var products = catalogData['products'];
+    CatalogModel.items = List.from(products).map<Item>((item) => Item.fromMap(item)).toList();
+    setState(() {});
+  }
+
+  //
+  @override
   Widget build(BuildContext context) {
-    final dummyList = List.generate(20, (index) => CatalogModel.items[0]);
     // replacing Material with Scaffold b/c it is a component of material which is used for UI
     return Scaffold(
       appBar: AppBar(
@@ -35,14 +46,14 @@ class Home extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: ListView.builder(
-        itemCount: dummyList.length,
-        itemBuilder: (context, index) {
-          return ItemWidget(
-            item: dummyList[index],
-          );
-      },
-      ),
+      body: (CatalogModel.items.isNotEmpty) ?
+        ListView.builder(
+          itemCount: CatalogModel.items.length,
+          itemBuilder: (context, index)
+          => ItemWidget(
+            item: CatalogModel.items[index],
+          ),
+      ) : Center(child: CircularProgressIndicator()),
       drawer: MyDrawer(),
     );
   }
