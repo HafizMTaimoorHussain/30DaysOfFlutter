@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/models/catalog.dart';
+import 'package:flutter_demo/screens/details.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../themes.dart';
@@ -15,7 +16,15 @@ class CatalogList extends StatelessWidget {
       itemCount: CatalogModel.items.length,
       itemBuilder: (context, index) {
         final catalog = CatalogModel.items[index];
-        return CatalogItem(catalog: catalog);
+        return InkWell(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailsPage(catalog: catalog),
+            ),
+          ),
+          child: CatalogItem(catalog: catalog),
+        );
       },
     );
   }
@@ -30,35 +39,41 @@ class CatalogItem extends StatelessWidget {
     return VxBox(
       child: Row(
         children: [
-          CatalogImage(image: catalog.image),
+          Hero(
+            tag: Key(
+              catalog.id.toString(),
+            ),
+            child: CatalogImage(image: catalog.image),
+          ),
           Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              catalog.name.text.lg.color(MyTheme.darkBluishColor).bold.make(),
+              catalog.desc.text.sm.make(),
+              10.heightBox,
+              ButtonBar(
+                alignment: MainAxisAlignment.spaceBetween,
+                buttonPadding: EdgeInsets.zero,
                 children: [
-                  catalog.name.text.lg.color(MyTheme.darkBluishColor).bold.make(),
-                  catalog.desc.text.sm.make(),
-                  10.heightBox,
-                  ButtonBar(
-                    alignment: MainAxisAlignment.spaceBetween,
-                    buttonPadding: EdgeInsets.zero,
-                    children: [
-                      "\$${catalog.price}".text.bold.xl.make(),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              MyTheme.darkBluishColor,
-                            ),
-                            shape: MaterialStateProperty.all(
-                              StadiumBorder(),
-                            )),
-                        child: "Buy".text.make(),
-                      )
-                    ],
-                  ).pOnly(right: 8.0),
+                  "\$${catalog.price}".text.bold.xl.make(),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        MyTheme.darkBluishColor,
+                      ),
+                      shape: MaterialStateProperty.all(
+                        StadiumBorder(),
+                      ),
+                    ),
+                    child: "Buy".text.make(),
+                  )
                 ],
-              )),
+              ).pOnly(right: 8.0),
+            ],
+          )),
         ],
       ),
     ).white.rounded.square(150).make().py16();
