@@ -1,6 +1,7 @@
-// ignore_for_file: use_key_in_widget_constructors, unused_import, duplicate_ignore
+// ignore_for_file: use_key_in_widget_constructors, unused_import, duplicate_ignore, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/screens/cart.dart';
 import 'package:flutter_demo/utils/routes.dart';
 import 'package:flutter_demo/widgets/themes.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,8 +27,9 @@ class MyApp extends StatelessWidget {
       routes: {
         // "/": (context) => Login(),
         "/": (context) => Home(),
+        AppRoutes.LoginRoute: (context) => Login(),
         AppRoutes.HomeRoute: (context) => Home(),
-        AppRoutes.LoginRoute: (context) => Login()
+        AppRoutes.CartRoute: (context) => CartPage()
       },
     );
   }
