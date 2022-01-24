@@ -1,7 +1,15 @@
 // ignore_for_file: camel_case_types
 
+import 'package:flutter/cupertino.dart';
+
 class CatalogModel {
   static List<Item> items = [];
+
+ static Item getById(int id) =>
+      items.firstWhere((element) => element.id == id);
+    // orElse: null -> making issues.
+
+ static Item getByPosition(int pos) => items[pos];
 }
 
 class Item {
