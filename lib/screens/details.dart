@@ -15,9 +15,9 @@ class DetailsPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
       ),
-      backgroundColor: MyTheme.creamColor,
+      backgroundColor: context.canvasColor,
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: context.cardColor,
         child: ButtonBar(
           alignment: MainAxisAlignment.spaceBetween,
           buttonPadding: EdgeInsets.zero,
@@ -27,12 +27,11 @@ class DetailsPage extends StatelessWidget {
               onPressed: () {},
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(
-                  MyTheme.darkBluishColor,
+                  context.theme.backgroundColor,
                 ),
                 shape: MaterialStateProperty.all(
                   StadiumBorder(),
-                ),
-              ),
+                ),),
               child: "Add to cart".text.make(),
             ).wh(120, 50)
           ],
@@ -53,17 +52,17 @@ class DetailsPage extends StatelessWidget {
                 arcType: VxArcType.CONVEY,
                 edge: VxEdge.TOP,
                 child: Container(
-                  color: Colors.white,
+                  color: context.cardColor,
                   width: context.screenWidth,
                   child: Column(
                     children: [
                       catalog.name.text.xl4
-                          .color(MyTheme.darkBluishColor)
+                          .color(context.theme.toggleableActiveColor)
                           .bold
                           .make(),
                       catalog.desc.text.xl.make(),
                       10.heightBox,
-                      "Et ut vero lorem ipsum nonumy dolore, kasd vero takimata sit dolores. Vero et amet et gubergren takimata amet. Et dolore ipsum eirmod tempor labore diam dolor. Sadipscing dolore consetetur eirmod et, lorem amet justo tempor consetetur sadipscing, erat amet lorem duo sadipscing dolore sit est, et eos at duo."
+                      "Et ut vero lorem ipsum nonumy dolore, kasd vero takimata sit dolores."
                           .text
                           .make()
                           .p16()

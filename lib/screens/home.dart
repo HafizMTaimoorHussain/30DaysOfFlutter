@@ -7,11 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_demo/models/catalog.dart';
 import 'package:flutter_demo/utils/routes.dart';
-import 'package:flutter_demo/widgets/drawer.dart';
 import 'package:flutter_demo/widgets/home_widgets/catalog_header.dart';
 import 'package:flutter_demo/widgets/home_widgets/catalog_list.dart';
-import 'package:flutter_demo/widgets/item_widget.dart';
-import 'package:flutter_demo/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class Home extends StatefulWidget {
@@ -65,11 +62,11 @@ class _HomeState extends State<Home> {
 
       // : Center(child: CircularProgressIndicator()),
       // drawer: MyDrawer(),
-      backgroundColor: MyTheme.creamColor,
+      backgroundColor: context.canvasColor,
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pushNamed(context, AppRoutes.CartRoute),
-        backgroundColor: MyTheme.darkBluishColor,
-        child: Icon(CupertinoIcons.cart),
+        backgroundColor: context.theme.backgroundColor,
+        child: Icon(CupertinoIcons.cart, color: Colors.white),
       ),
       body: SafeArea(
         child: Container(
