@@ -1,21 +1,12 @@
 // ignore_for_file: camel_case_types
 
-import 'package:flutter/cupertino.dart';
-
 class CatalogModel {
-  static final catModel = CatalogModel._internal();
-
-  CatalogModel._internal();
-
-  factory CatalogModel() => catModel;
-
   static List<Item> items = [];
 
- Item getById(int id) =>
-      items.firstWhere((element) => element.id == id);
-    // orElse: null -> making issues.
+  Item getById(int id) => items.firstWhere((element) => element.id == id);
+  // orElse: null -> making issues.
 
- Item getByPosition(int pos) => items[pos];
+  Item getByPosition(int pos) => items[pos];
 }
 
 class Item {
@@ -36,21 +27,20 @@ class Item {
 
   factory Item.fromMap(Map<String, dynamic> map) {
     return Item(
-      id: map["id"],
-      name: map["name"],
-      desc: map["desc"],
-      price: map["price"],
-      color: map["color"],
-      image: map["image"]
-    );
+        id: map["id"],
+        name: map["name"],
+        desc: map["desc"],
+        price: map["price"],
+        color: map["color"],
+        image: map["image"]);
   }
 
   toMap() => {
-    "id": id,
-    "name": name,
-    "desc": desc,
-    "price": price,
-    "color": color,
-    "image": image
-  };
+        "id": id,
+        "name": name,
+        "desc": desc,
+        "price": price,
+        "color": color,
+        "image": image
+      };
 }
