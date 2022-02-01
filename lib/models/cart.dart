@@ -1,5 +1,8 @@
 // ignore_for_file: unnecessary_getters_setters
 
+import 'package:flutter_demo/core/store.dart';
+import 'package:velocity_x/velocity_x.dart';
+
 import 'catalog.dart';
 
 class CartModel {
@@ -34,3 +37,23 @@ class CartModel {
     _itemIds.remove(item.id);
   }
 }
+
+class AddMutation extends VxMutation<MyStore>{
+  final Item item;
+  AddMutation(this.item);
+  @override
+  perform() {
+    store?.cart._itemIds.add(item.id);
+  }
+}
+
+class RemoveMutation extends VxMutation<MyStore>{
+  final Item item;
+  RemoveMutation(this.item);
+  @override
+  perform() {
+    store?.cart._itemIds.remove(item.id);
+  }
+}
+
+

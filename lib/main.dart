@@ -13,16 +13,16 @@ import 'package:flutter_demo/screens/login.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(VxState(
+    store: MyStore(),
+    child: MyApp(),
+  ));
 }
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final store = MyStore();
-    return VxState(
-      store: MyStore(),
-      child: MaterialApp(
+    return MaterialApp(
         // home: Home(),
         // themeMode: ThemeMode.dark,
         themeMode: ThemeMode.light,
@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
           AppRoutes.HomeRoute: (context) => Home(),
           AppRoutes.CartRoute: (context) => CartPage()
         },
-      ),
-    );
+      );
   }
 }
