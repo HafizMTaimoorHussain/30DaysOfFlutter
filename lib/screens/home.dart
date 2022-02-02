@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
 
   final String name = "Peter Parker";
 
-  final url = "https://91a3-202-143-127-149.ngrok.io/api/footballers";
+  final url = "https://heroku-footballer-app-peter.herokuapp.com/api/footballers";
 
   @override
   void initState() {
