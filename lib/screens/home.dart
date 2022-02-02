@@ -4,7 +4,6 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_demo/core/store.dart';
 import 'package:flutter_demo/models/cart.dart';
 import 'package:flutter_demo/models/catalog.dart';
@@ -12,6 +11,7 @@ import 'package:flutter_demo/utils/routes.dart';
 import 'package:flutter_demo/widgets/home_widgets/catalog_header.dart';
 import 'package:flutter_demo/widgets/home_widgets/catalog_list.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
   @override
@@ -23,6 +23,8 @@ class _HomeState extends State<Home> {
 
   final String name = "Peter Parker";
 
+  final url = "https://91a3-202-143-127-149.ngrok.io/api/footballers";
+
   @override
   void initState() {
     super.initState();
@@ -31,8 +33,14 @@ class _HomeState extends State<Home> {
 
   loadData() async {
     await Future.delayed(Duration(seconds: 2));
-    final loadedData = await rootBundle.loadString("assets/files/catalog.json");
-    final catalogData = jsonDecode(loadedData);
+    // when reading from json file //
+    // final loadedData = await rootBundle.loadString("assets/files/catalog.json");
+    // final catalogData = jsonDecode(loadedData);
+
+    final response = await http.get(Uri.parse(url));
+    final catalogJson = response.body;
+    final catalogData = jsonDecode(catalogJson);
+    // print('value : $catalogData');
     var products = catalogData['products'];
     CatalogModel.items =
         List.from(products).map<Item>((item) => Item.fromMap(item)).toList();
@@ -73,7 +81,7 @@ class _HomeState extends State<Home> {
           backgroundColor: context.theme.backgroundColor,
           child: Icon(CupertinoIcons.cart, color: Colors.white),
         ).badge(
-          color: Vx.red500,
+          color: Colors.white,
           size: 22,
           count: _cart.items.length,
           textStyle: TextStyle(
